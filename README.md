@@ -40,7 +40,7 @@ mindmap
       ::icon(🔌)
       Descripción: Usar APIs, personalizar runtime (Gemini, GPT...)
       Ingeniería de Prompts: Diseño cuidadoso de instrucciones
-      RAG (Retrieval-Augmented Generation): Combinar LLM + BBDD propia (Buscar -> Pasar info+pregunta a LLM)
+      RAG - Retrieval-Augmented Generation: Combinar LLM + BBDD propia (Buscar -> Pasar info+pregunta a LLM)
       Pros
         ::icon(✅)
         Más rápido / económico iniciar
