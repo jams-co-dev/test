@@ -18,7 +18,7 @@ mindmap
         ::icon(🎯)
         Grandes tech/instituciones
         Raramente práctico servicios esp.
-    2. Afinar
+    2. Afinar Modelo Existente (Fine-tuning)
       ::icon(⚙️)
       Descripción: Tomar base (Llama, Mistral...), re-entrenar con datos específicos
       Pros
