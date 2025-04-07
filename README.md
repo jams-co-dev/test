@@ -1,3 +1,4 @@
+```mermaid
 mindmap
   root((Opciones Principales LLM "Propio"))
     ::icon(💡)
@@ -72,3 +73,4 @@ mindmap
       Experiencia Técnica (ML, Python, Librerías)
       Ética y Seguridad (Contenido dañino/sesgado, Salvaguardas)
       Privacidad de Datos (Cumplimiento GDPR)
+```
