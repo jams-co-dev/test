@@ -38,7 +38,7 @@ mindmap
         **Opción más común/práctica**
     3. Usar APIs + Prompts + RAG
       ::icon(🔌)
-      Descripción: Usar APIs (Gemini, GPT...), personalizar runtime
+      Descripción: Usar APIs, personalizar runtime (Gemini, GPT...)
       Ingeniería de Prompts: Diseño cuidadoso de instrucciones
       RAG (Retrieval-Augmented Generation): Combinar LLM + BBDD propia (Buscar -> Pasar info+pregunta a LLM)
       Pros
