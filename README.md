@@ -1,76 +1,66 @@
+# Componentes de un Agente de IA en n8n
+
+Este diagrama conceptual describe los componentes clave de un agente de Inteligencia Artificial (IA) implementado utilizando la plataforma de automatización n8n, junto con sus conectores y el flujo general del proceso.
+
 ```mermaid
-mindmap
-  root((Opciones Principales LLM "Propio"))
-    ::icon(💡)
-    1. Entrenar desde Cero
-      ::icon(🏗️)
-      Descripción: Recolectar datos masivos, diseñar arquit., entrenar (meses, GPUs potentes)
-      Pros
-        ::icon(✅)
-        Control total
-        Modelo único potencial
-      Contras
-        ::icon(❌)
-        Costo extremo (millones)
-        Requiere datos masivos/calidad
-        Requiere equipo experto mundial
-      Viabilidad
-        ::icon(🎯)
-        Grandes tech/instituciones
-        Raramente práctico servicios esp.
-    2. Afinar Modelo Existente (Fine-tuning)
-      ::icon(⚙️)
-      Descripción: Tomar base, re-entrenar con datos específicos (Llama, Mistral...)
-      Pros
-        ::icon(✅)
-        Más rápido / económico
-        Menos datos / cómputo
-        Especialización
-        Mantiene capacidades base
-      Contras
-        ::icon(❌)
-        Dependencia base (calidad/licencia)
-        Requiere datos específicos/calidad
-        Requiere conocimientos ML
-        Necesita GPUs (menos)
-      Viabilidad
-        ::icon(🎯)
-        **Opción más común/práctica**
-    3. Usar APIs + Prompts + RAG
-      ::icon(🔌)
-      Descripción: Usar APIs, personalizar runtime (Gemini, GPT...)
-      Ingeniería de Prompts: Diseño cuidadoso de instrucciones
-      RAG - Retrieval-Augmented Generation: Combinar LLM + BBDD propia (Buscar -> Pasar info+pregunta a LLM)
-      Pros
-        ::icon(✅)
-        Más rápido / económico iniciar
-        Sin entrenamiento / GPUs dedicadas (pago x uso)
-        Incorpora conocimiento actualizado (RAG)
-        Menor barrera técnica
-      Contras
-        ::icon(❌)
-        Menos control intrínseco
-        Dependencia proveedor externo
-        Personalización limitada (prompt/RAG)
-        Posible latencia (RAG)
-      Viabilidad
-        ::icon(🎯)
-        Muy viable, a menudo suficiente
-        Ideal para incorporar conocimiento esp.
-    Pasos Clave para Afinar (Opción 2)
-      ::icon(🛠️)
-      a. Definir Objetivo/Caso Uso
-      b. Elegir Modelo Base (Tamaño, Licencia, Rendimiento, Comunidad)
-      c. Preparar Datos (CRÍTICO - Formato, Calidad, Cantidad, Limpieza)
-      d. Configurar Entorno (HW: GPUs/Cloud, SW: libs Python)
-      e. Realizar Afinamiento (Cargar, Hiperparám., Técnicas eficientes, Ejecutar)
-      f. Evaluar Modelo (Métricas auto., **Eval. Humana**)
-      g. Desplegar Modelo (API, Infraestructura, Endpoints Cloud)
-      h. Monitorizar y Mantener (Rendimiento, Feedback, Re-entrenar)
-    Consideraciones Adicionales
-      ::icon(⚠️)
-      Costo (Cómputo, Almacenamiento, Expertos)
-      Experiencia Técnica (ML, Python, Librerías)
-      Ética y Seguridad (Contenido dañino/sesgado, Salvaguardas)
-      Privacidad de Datos (Cumplimiento GDPR)
-```
+graph LR
+    A[Entrada (Input)] --> B(Percepción);
+    subgraph Triggers n8n
+        style A fill:#f9f,stroke:#333,stroke-width:2px
+        A1[Email (IMAP)]
+        A2[Base de Datos]
+        A3[Webhook]
+        A4[Aplicación SaaS]
+        A5[Cron]
+        A --> A1 & A2 & A3 & A4 & A5
+    end
+
+    B --> C(Procesamiento y Razonamiento);
+    subgraph Nodos de Transformación n8n
+        style B fill:#ccf,stroke:#333,stroke-width:2px
+        B1[Function (JavaScript)]
+        B2[JSON Parse]
+        B3[String Manipulation]
+        B4[API Request]
+        B --> B1 & B2 & B3 & B4
+    end
+
+    C --> D[Acción (Action)];
+    subgraph Nodos de Lógica y IA n8n
+        style C fill:#9cf,stroke:#333,stroke-width:2px
+        C1[If]
+        C2[Switch]
+        C3[Set]
+        C4[Loop]
+        C5[Integración IA (OpenAI, Google Cloud AI)]
+        C --> C1 & C2 & C3 & C4 & C5
+    end
+
+    D --> E[(Memoria (Opcional))];
+    subgraph Nodos de Integración n8n
+        style D fill:#fcc,stroke:#333,stroke-width:2px
+        D1[Email Send]
+        D2[Base de Datos]
+        D3[HTTP Request]
+        D4[Messaging Apps]
+        D5[CRM]
+        D --> D1 & D2 & D3 & D4 & D5
+    end
+
+    subgraph Almacenamiento de Memoria n8n
+        style E fill:#efe,stroke:#333,stroke-width:2px
+        E1[Variables de Entorno]
+        E2[Bases de Datos Externas]
+        E3[Servicios de Almacenamiento]
+        E4[Nodos de Espera/Respuesta]
+        E -- Almacena/Recupera --> E1 & E2 & E3 & E4
+        C -- Toma Decisiones Basadas en --> E
+    end
+
+    subgraph Flujo General del Proceso
+        F[Trigger Activa el Flujo] --> G(Procesamiento de Datos);
+        G --> H{¿Condición Cumplida?};
+        H -- Sí --> I[Ejecutar Acción];
+        H -- No --> J[Otro Proceso/Fin];
+        I --> K[Fin del Flujo (o Continúa)];
+    end
